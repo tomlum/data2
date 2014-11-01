@@ -1,22 +1,21 @@
+package Data2;
 
-package pfb;
 
-
-public class RegularBranch implements RegularBiTr, Iterator{
+public class Branch implements FinSet, Iterator{
     
     int node;
-    RegularBiTr le;
-    RegularBiTr ri;
+    FinSet le;
+    FinSet ri;
     
     
     
-    public RegularBranch(int node){
+    public Branch(int node){
         this.node = node;
-        this.le = new RegularLeaf();
-        this.ri = new RegularLeaf();
+        this.le = new Leaf();
+        this.ri = new Leaf();
     }
     
-    public RegularBranch(int node, RegularBiTr le, RegularBiTr ri){
+    public Branch(int node, FinSet le, FinSet ri){
         this.node = node;
         this.le = le;
         this.ri = ri;
@@ -24,17 +23,17 @@ public class RegularBranch implements RegularBiTr, Iterator{
     
     
     public Object here(){
-        return new Integer(this.node);
+        return this.node;
     }
     public boolean hasNext(){
-        if(!(this.ri.isEmptyHuh()&&this.le.isEmptyHuh())){
-            return true;
+        if(this.ri.isEmptyHuh()&&this.le.isEmptyHuh()){
+            return false;
         }
-        return false;
+        return true;
         //return this.le.union(this.ri).HasNext()
     }
     
-    public Object next(){
+    public Iterator next(){
         return this.le.union(this.ri);
     }
     
@@ -59,47 +58,46 @@ public class RegularBranch implements RegularBiTr, Iterator{
             
     }
     
-    public RegularBiTr add(int elt){
+    public FinSet add(int elt){
         if(elt < this.node){
-             return new RegularBranch(this.node,this.le.add(elt),this.ri);}
+             return new Branch(this.node,this.le.add(elt),this.ri);}
         if(elt > this.node){
-            return new RegularBranch(this.node,this.le,this.ri.add(elt));}
+            return new Branch(this.node,this.le,this.ri.add(elt));}
         return this;       
     }
     
-    //still requires union
-    public RegularBiTr remove(int elt){
+    public FinSet remove(int elt){
         if(this.node == elt){
             return this.le.union(this.ri);
             }
         else if(elt < this.node){
-            return new RegularBranch(this.node,this.le.remove(elt),this.ri);
+            return new Branch(this.node,this.le.remove(elt),this.ri);
         }
         else
-        return new RegularBranch(this.node,this.le,this.ri.remove(elt));
+        return new Branch(this.node,this.le,this.ri.remove(elt));
         }
     
     
-    public RegularBiTr union(RegularBiTr u){
+    public FinSet union(FinSet u){
         return this.ri.union(this.le.union(u)).add(node);
     }
     
-    public RegularBiTr inter(RegularBiTr u){
+    public FinSet inter(FinSet u){
         if(u.member(this.node)){
-        return new RegularBranch(this.node, this.le.inter(u), this.ri.inter(u));}
+        return new Branch(this.node, this.le.inter(u), this.ri.inter(u));}
         else{
     return this.le.inter(u).union(this.ri.inter(u));}
     
     }
     
-    public RegularBiTr diff(RegularBiTr u){
+    public FinSet diff(FinSet u){
         if(!u.member(this.node)){
-        return new RegularBranch(this.node, this.le.diff(u), this.ri.diff(u));}
+        return new Branch(this.node, this.le.diff(u), this.ri.diff(u));}
         else{
     return this.le.diff(u).union(this.ri.diff(u));}
     }
     
-    public boolean equal(RegularBiTr u){
+    public boolean equal(FinSet u){
          if(this.subset(u)&&u.subset(this)){
              return true;
          }
@@ -107,7 +105,7 @@ public class RegularBranch implements RegularBiTr, Iterator{
     }
     
     
-    public boolean subset(RegularBiTr u){
+    public boolean subset(FinSet u){
          if(u.member(this.node)){
              return(this.le.subset(u)&&this.ri.subset(u));
          }

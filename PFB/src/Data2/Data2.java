@@ -1,18 +1,18 @@
 
-package pfb;
+package Data2;
 
 
-public class PFB {
+public class Data2 {
     
     public static boolean hasOdds(Iterator it){
         boolean anyOdds = false;
         try{
-            Integer current = (Integer)it.here();
-            anyOdds = (Integer)it.here()%2 == 1;
+            Iterator iter = it;
             
             while(it.hasNext() && !anyOdds){
-                anyOdds = (Integer)it.here()%2 == 1;
-                current = (Integer)it.next();
+                Integer current = (Integer)iter.here();
+                anyOdds = current%2 == 1;
+                iter = iter.next();
             }
         }
         catch(NothingHere e){
@@ -22,7 +22,8 @@ public class PFB {
 
    
     public static void main(String[] args) {
-        Testers.testHasOdds(30);
+        //Testers.testHasOdds(30);
+       Testers.testHasOdds(20);
     }
     
 }

@@ -1,11 +1,11 @@
 
-package pfb;
+package Data2;
 
-public class RegularLeaf implements RegularBiTr, Iterator{
+public class Leaf implements FinSet, Iterator{
    
     
    
-    public RegularLeaf() {}
+    public Leaf() {}
     
      public Object here() throws NothingHere{
         throw new NothingHere();
@@ -13,7 +13,7 @@ public class RegularLeaf implements RegularBiTr, Iterator{
     public boolean hasNext(){
         return false;
     }
-    public Object next() throws NothingHere{
+    public Iterator next() throws NothingHere{
         throw new NothingHere();
     }
     
@@ -29,34 +29,34 @@ public class RegularLeaf implements RegularBiTr, Iterator{
         return false;
     }
     
-    public RegularBiTr add(int elt){
-        return new RegularBranch(elt);
+    public FinSet add(int elt){
+        return new Branch(elt);
     }
     
-    public RegularBiTr remove(int elt){
+    public FinSet remove(int elt){
         return this;
     }
     
-    public RegularBiTr union(RegularBiTr u){
+    public FinSet union(FinSet u){
         return u;
     }
     
-    public RegularBiTr inter(RegularBiTr u){
-        return new RegularLeaf();
+    public FinSet inter(FinSet u){
+        return new Leaf();
     }
     
-    public RegularBiTr diff(RegularBiTr u){
-        return new RegularLeaf();
+    public FinSet diff(FinSet u){
+        return new Leaf();
     }
     
-    public boolean equal(RegularBiTr u){
+    public boolean equal(FinSet u){
         if(u.isEmptyHuh()){
             return true;
         }
         return false;
     }
    
-    public boolean subset(RegularBiTr u){
+    public boolean subset(FinSet u){
         return true;
     }
     
