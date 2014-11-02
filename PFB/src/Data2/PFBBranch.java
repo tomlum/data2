@@ -25,19 +25,12 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
     }
     
     
-    public Object here(){
+    public T here(){
         return key;
     }
-    public boolean hasNext(){
-        if(this.ri.isEmptyHuh()&&this.le.isEmptyHuh()){
-            return false;
-        }
-        return true;
-        //return this.le.union(this.ri).HasNext()
-    }
     
-    public PFB next(){
-        return this.le.union(this.ri);
+    public Iterator next(){
+        return new Trunk(this.le, this.ri);
     }
     
     public int keyCount(){
@@ -45,6 +38,10 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
         return 1 + this.ri.keyCount() + this.le.keyCount();
         }
         else return this.ri.keyCount() + this.le.keyCount();
+    }
+    
+    public boolean anythingHere(){
+        return true;
     }
     
     public boolean isEmptyHuh(){

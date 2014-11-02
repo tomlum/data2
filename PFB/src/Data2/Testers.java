@@ -5,13 +5,14 @@ public class Testers {
     
     public static void printSequence(Iterator it){
         Iterator iter = it;
-        System.out.println(iter.hasNext());
         try{
+            while(true){
         System.out.println(iter.here());
         iter = iter.next();
         }
+        }
         catch(NothingHere e){
-            System.out.println("Nothing Here");
+            System.out.println("caught");
         }
     }
    
@@ -37,6 +38,7 @@ public class Testers {
         }
     }
     
+    
     public static void testNoFilledBagsAndEmptyHuhAndRemoveAll(int trials){
         for(int i = 0; i < trials; i++){
             PFB theBag = new PFBLeaf();
@@ -56,7 +58,7 @@ public class Testers {
     public static FinSet randomBST(int type, int size){
         FinSet tree = new Leaf();
         for(int i = 0; i < size; i++){
-            int toAdd = randomOddOrEven(type, 20);
+            int toAdd = randomOddOrEven(type, 100);
             tree = tree.add(toAdd);
             //System.out.println(toAdd);
         }
@@ -71,6 +73,23 @@ public class Testers {
             //System.out.println(toAdd);
         }
         return bag;
+    }
+    
+    public static PFB randomStringPFB(int size){
+        PFB bag = new PFBLeaf();
+        for(int i = 0; i < size; i++){
+            String toAdd = randomString(randomInt(1,20));
+            bag = bag.add(toAdd, randomInt(1,5));
+        }
+        return bag;
+    }
+    
+    public static String randomString(int length){
+        StringBuffer temp = new StringBuffer();
+        for(int i = 0; i < length; i++){
+            temp.append(Character.toChars(randomInt(65, 90)));
+        }
+        return temp.toString();
     }
     
     static Random rand = new Random();

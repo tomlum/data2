@@ -4,7 +4,7 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
     
     public PFBLeaf() {}
     
-     public Object here() throws NothingHere{
+    public T here() throws NothingHere{
         throw new NothingHere();
     }
     public boolean hasNext(){
@@ -17,6 +17,10 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
     public int keyCount(){
         return 0;
     };
+    
+    public boolean anythingHere(){
+        return false;
+    }
     
     public boolean isEmptyHuh(){
         return true;

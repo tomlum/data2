@@ -7,10 +7,10 @@ public class Leaf implements FinSet, Iterator{
    
     public Leaf() {}
     
-     public Object here() throws NothingHere{
+     public Integer here() throws NothingHere{
         throw new NothingHere();
     }
-    public boolean hasNext(){
+    public boolean anythingHere(){
         return false;
     }
     public Iterator next() throws NothingHere{

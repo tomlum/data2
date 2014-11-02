@@ -3,39 +3,37 @@ package Data2;
 
 public class Branch implements FinSet, Iterator{
     
-    int node;
+    Integer key;
     FinSet le;
     FinSet ri;
     
     
     
-    public Branch(int node){
-        this.node = node;
+    public Branch(int key){
+        this.key = key;
         this.le = new Leaf();
         this.ri = new Leaf();
     }
     
-    public Branch(int node, FinSet le, FinSet ri){
-        this.node = node;
+    public Branch(int key, FinSet le, FinSet ri){
+        this.key = key;
         this.le = le;
         this.ri = ri;
     }
     
     
-    public Object here(){
-        return this.node;
+    public Integer here(){
+        return this.key;
     }
-    public boolean hasNext(){
-        if(this.ri.isEmptyHuh()&&this.le.isEmptyHuh()){
-            return false;
-        }
+    
+    public boolean anythingHere(){
         return true;
-        //return this.le.union(this.ri).HasNext()
     }
     
     public Iterator next(){
-        return this.le.union(this.ri);
+        return new Trunk(this.le, this.ri);
     }
+    
     
     
     
@@ -48,10 +46,10 @@ public class Branch implements FinSet, Iterator{
     }
     
     public boolean member(int elt){
-            if(elt<this.node){
+            if(elt<this.key){
                 return this.le.member(elt);
             }
-            if(elt>this.node){
+            if(elt>this.key){
                 return this.ri.member(elt);
             }
             return true;
@@ -59,40 +57,40 @@ public class Branch implements FinSet, Iterator{
     }
     
     public FinSet add(int elt){
-        if(elt < this.node){
-             return new Branch(this.node,this.le.add(elt),this.ri);}
-        if(elt > this.node){
-            return new Branch(this.node,this.le,this.ri.add(elt));}
+        if(elt < this.key){
+             return new Branch(this.key,this.le.add(elt),this.ri);}
+        if(elt > this.key){
+            return new Branch(this.key,this.le,this.ri.add(elt));}
         return this;       
     }
     
     public FinSet remove(int elt){
-        if(this.node == elt){
+        if(this.key == elt){
             return this.le.union(this.ri);
             }
-        else if(elt < this.node){
-            return new Branch(this.node,this.le.remove(elt),this.ri);
+        else if(elt < this.key){
+            return new Branch(this.key,this.le.remove(elt),this.ri);
         }
         else
-        return new Branch(this.node,this.le,this.ri.remove(elt));
+        return new Branch(this.key,this.le,this.ri.remove(elt));
         }
     
     
     public FinSet union(FinSet u){
-        return this.ri.union(this.le.union(u)).add(node);
+        return this.ri.union(this.le.union(u)).add(key);
     }
     
     public FinSet inter(FinSet u){
-        if(u.member(this.node)){
-        return new Branch(this.node, this.le.inter(u), this.ri.inter(u));}
+        if(u.member(this.key)){
+        return new Branch(this.key, this.le.inter(u), this.ri.inter(u));}
         else{
     return this.le.inter(u).union(this.ri.inter(u));}
     
     }
     
     public FinSet diff(FinSet u){
-        if(!u.member(this.node)){
-        return new Branch(this.node, this.le.diff(u), this.ri.diff(u));}
+        if(!u.member(this.key)){
+        return new Branch(this.key, this.le.diff(u), this.ri.diff(u));}
         else{
     return this.le.diff(u).union(this.ri.diff(u));}
     }
@@ -106,7 +104,7 @@ public class Branch implements FinSet, Iterator{
     
     
     public boolean subset(FinSet u){
-         if(u.member(this.node)){
+         if(u.member(this.key)){
              return(this.le.subset(u)&&this.ri.subset(u));
          }
          else{return false;}

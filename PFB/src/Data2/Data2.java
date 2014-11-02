@@ -19,6 +19,23 @@ public class Data2 {
         }
             return anyOdds;
     }
+    
+    public static Comparable longest(Iterator it){
+        Comparable longest = 0;
+        Iterator iter = it;
+        try{
+        longest = iter.here();
+            while(true){
+            if(longest.compareTo(iter.here()) > 0){
+                longest = iter.here();
+            }
+            iter = iter.next();
+            }
+        }
+        catch(NothingHere e){
+        }
+            return longest;
+    }
 
    
     public static void main(String[] args) {
