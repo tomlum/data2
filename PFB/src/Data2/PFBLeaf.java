@@ -22,8 +22,16 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
         return true;
     }
     
+    public boolean noFilledBags(){
+        return true;
+    }
+    
     public boolean member(T elt){
         return false;
+    }
+    
+    public int countOf(T elt){
+        return 0;
     }
     
     public PFB add(T elt, int c){
@@ -31,6 +39,10 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
     }
     
     public PFB remove(T elt, int c){
+        return this;
+    }
+    
+    public PFB removeAll(T elt){
         return this;
     }
     

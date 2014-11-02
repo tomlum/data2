@@ -40,8 +40,6 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
         return this.le.union(this.ri);
     }
     
-    
-    
     public int keyCount(){
         if(this.count > 0){
         return 1 + this.ri.keyCount() + this.le.keyCount();
@@ -50,7 +48,11 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
     }
     
     public boolean isEmptyHuh(){
-        return this.count>0;
+        return false;
+    }
+    
+    public boolean noFilledBags(){
+        return (this.count==0&&this.le.noFilledBags()&&this.ri.noFilledBags());
     }
     
     public boolean member(T elt){
@@ -66,22 +68,45 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
             return true;
     }
     
+    public int countOf(T elt){
+            if(elt.compareTo(this.key)<0){
+                return this.le.countOf(elt);
+            }
+            if(elt.compareTo(this.key)>0){
+                return this.ri.countOf(elt);
+            }
+            return this.count;
+    }
+    
     public PFB add(T elt, int c){
+        
         if(this.key.compareTo(elt)>0){
              return new PFBBranch(this.key,this.count,this.le.add(elt,c),this.ri);}
-        if(elt.compareTo(this.key)<0){
+        if(this.key.compareTo(elt)<0){
             return new PFBBranch(this.key,this.count,this.le,this.ri.add(elt,c));}
         return new PFBBranch(this.key,this.count+c,this.le,this.ri);       
     }
     
     public PFB remove(T elt, int c){
-        if(this.key.compareTo(elt)==0){
-            return this.le.union(this.ri);
+        if(elt.compareTo(this.key)==0){
+            return new PFBBranch(key, Math.max(this.count-c,0), this.le, this.ri);
             }
         else if(elt.compareTo(this.key)<0){
             return new PFBBranch(this.key,this.count,this.le.remove(elt,c),this.ri);
         }
         return new PFBBranch(this.key,this.count,this.le,this.ri.remove(elt,c));
+        }
+    
+    public PFB removeAll(T elt){
+        if(elt.compareTo(this.key)==0){
+            return new PFBBranch(key, 0, this.le, this.ri);
+            }
+        else if(elt.compareTo(this.key)< 0){
+            return new PFBBranch(this.key,this.count,this.le.removeAll(elt),this.ri);
+        }
+        else{
+            return new PFBBranch(this.key,this.count,this.le,this.ri.removeAll(elt));
+        }
         }
     
     

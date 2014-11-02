@@ -9,7 +9,7 @@ public class Data2 {
         try{
             Iterator iter = it;
             
-            while(it.hasNext() && !anyOdds){
+            while(!anyOdds){
                 Integer current = (Integer)iter.here();
                 anyOdds = current%2 == 1;
                 iter = iter.next();
@@ -22,8 +22,8 @@ public class Data2 {
 
    
     public static void main(String[] args) {
-        //Testers.testHasOdds(30);
        Testers.testHasOdds(20);
+       Testers.testNoFilledBagsAndEmptyHuhAndRemoveAll(1);
     }
     
 }

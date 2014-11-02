@@ -7,23 +7,21 @@ public class Testers {
         Iterator iter = it;
         System.out.println(iter.hasNext());
         try{
-        while(iter.hasNext()){
         System.out.println(iter.here());
         iter = iter.next();
-        }
-        System.out.println(iter.here());
         }
         catch(NothingHere e){
             System.out.println("Nothing Here");
         }
     }
+   
     
     public static void testHasOdds(int trials){
         for(int i = 0; i < trials; i++){
             FinSet theOddTree = randomBST(1, randomInt(1,20));
             FinSet theEvenTree = randomBST(2, randomInt(1,20));
-            PFB<Integer> theOddBag = randomPFB(1, randomInt(1,20));
-            PFB<Integer> theEvenBag = randomPFB(2, randomInt(1,20));
+            PFB theOddBag = randomPFB(1, randomInt(1,20));
+            PFB theEvenBag = randomPFB(2, randomInt(1,20));
             if(!Data2.hasOdds(theOddTree)||Data2.hasOdds(theEvenTree)){
                 System.out.println("Error in HasOdds, Trees");
             }
@@ -35,6 +33,21 @@ public class Testers {
             }
             if(theOddBag.isEmptyHuh()||theEvenBag.isEmptyHuh()){
                  System.out.println("Random Bags are Emtpy");
+            }
+        }
+    }
+    
+    public static void testNoFilledBagsAndEmptyHuhAndRemoveAll(int trials){
+        for(int i = 0; i < trials; i++){
+            PFB theBag = new PFBLeaf();
+            int size = randomInt(0,30);
+            for(int j = 0; j < size; j++){
+            int toAdd = randomInt(1,50);
+            theBag = theBag.add(toAdd, 10);
+            theBag = theBag.removeAll(toAdd);
+            }
+            if(!theBag.noFilledBags()||theBag.isEmptyHuh()){
+                System.out.println("Error in NFB/EmptyHuh/RemoveAll");
             }
         }
     }
