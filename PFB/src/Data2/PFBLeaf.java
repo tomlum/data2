@@ -26,6 +26,10 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
         return true;
     }
     
+    public int cardinality(){
+        return 0;
+    }
+    
     public boolean noFilledBags(){
         return true;
     }
@@ -40,6 +44,10 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
     
     public PFB add(T elt, int c){
         return new PFBBranch(elt, c);
+    }
+    
+    public PFB add(T elt){
+        return new PFBBranch(elt, 1);
     }
     
     public PFB remove(T elt, int c){

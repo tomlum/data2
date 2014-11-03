@@ -21,12 +21,12 @@ public class Data2 {
     }
     
     public static Comparable longest(Iterator it){
-        Comparable longest = 0;
+        Comparable longest = "Nothing in the Iterator";
         Iterator iter = it;
         try{
         longest = iter.here();
-            while(true){
-            if(longest.compareTo(iter.here()) > 0){
+            while(iter.anythingHere()){
+            if(iter.here().toString().length() > longest.toString().length()){
                 longest = iter.here();
             }
             iter = iter.next();
@@ -36,11 +36,29 @@ public class Data2 {
         }
             return longest;
     }
+    
+    public static int iterLength(Iterator it){
+        Comparable longest = "Nothing in the Iterator";
+        int count = 0;
+        Iterator iter = it;
+        try{
+            while(iter.anythingHere()){
+            count++;
+            iter = iter.next();
+            }
+            
+        }
+        catch(NothingHere e){
+        }
+            return count;
+    }
 
    
     public static void main(String[] args) {
        Testers.testHasOdds(20);
-       Testers.testNoFilledBagsAndEmptyHuhAndRemoveAll(1);
+       Testers.testNoFilledBagsAndEmptyHuhAndRemoveAllAndCountOf(10);
+       Testers.testLongest(20);
+       Testers.testIterLength(100);
     }
     
 }

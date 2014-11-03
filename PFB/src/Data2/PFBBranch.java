@@ -44,12 +44,16 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
         return true;
     }
     
+    public int cardinality(){
+        return 1 + this.le.cardinality() + this.ri.cardinality();
+    }
+    
     public boolean isEmptyHuh(){
         return false;
     }
     
     public boolean noFilledBags(){
-        return (this.count==0&&this.le.noFilledBags()&&this.ri.noFilledBags());
+        return (this.count<1&&this.le.noFilledBags()&&this.ri.noFilledBags());
     }
     
     public boolean member(T elt){
@@ -76,12 +80,19 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
     }
     
     public PFB add(T elt, int c){
-        
         if(this.key.compareTo(elt)>0){
              return new PFBBranch(this.key,this.count,this.le.add(elt,c),this.ri);}
         if(this.key.compareTo(elt)<0){
             return new PFBBranch(this.key,this.count,this.le,this.ri.add(elt,c));}
         return new PFBBranch(this.key,this.count+c,this.le,this.ri);       
+    }
+    
+    public PFB add(T elt){
+        if(this.key.compareTo(elt)>0){
+             return new PFBBranch(this.key,this.count,this.le.add(elt),this.ri);}
+        if(this.key.compareTo(elt)<0){
+            return new PFBBranch(this.key,this.count,this.le,this.ri.add(elt));}
+        return new PFBBranch(this.key,this.count+1,this.le,this.ri);       
     }
     
     public PFB remove(T elt, int c){
@@ -95,15 +106,14 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
         }
     
     public PFB removeAll(T elt){
-        if(elt.compareTo(this.key)==0){
-            return new PFBBranch(key, 0, this.le, this.ri);
-            }
-        else if(elt.compareTo(this.key)< 0){
+        
+        if(elt.compareTo(this.key)< 0){
             return new PFBBranch(this.key,this.count,this.le.removeAll(elt),this.ri);
         }
-        else{
+        else if(elt.compareTo(this.key)> 0){
             return new PFBBranch(this.key,this.count,this.le,this.ri.removeAll(elt));
         }
+        return new PFBBranch(key, 0, this.le, this.ri);
         }
     
     
