@@ -59,7 +59,7 @@ public class Data2 {
        Testers.testNoFilledBagsAndEmptyHuhAndRemoveAllAndCountOf(10);
        Testers.testLongest(20);
        Testers.testIterLength(100);
-       Testers.testSelfBalancing(100, 300);
+       Testers.testSelfBalancing(100, 100);
     }
     
 }

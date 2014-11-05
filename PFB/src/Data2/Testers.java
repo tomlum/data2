@@ -9,10 +9,16 @@ public class Testers {
             for(int j = 0; j < maxsize; j++){
             theBag = theBag.add(randomInt(1,100));
             }
-            if(theBag.longestPath() > 2*Math.log(theBag.cardinality())){
-                System.out.println("Error in PFB Self Balancing/longestPath");
-                System.out.println(theBag.longestPath());
-                System.out.println(2*Math.log(theBag.cardinality()));
+            boolean rbInvar2 = true;
+            int arbitraryBCount = theBag.ranPathBCount();
+            for(int j = 0; j < maxsize; j++){
+                if(arbitraryBCount!=theBag.ranPathBCount()){
+                    rbInvar2 = false;
+                }
+            }
+            if(!theBag.rbInvar1()||!rbInvar2){
+                PFBBranch elBag = (PFBBranch)theBag;
+                System.out.println("Error in PFB RB Invars");
             }
         }
     }

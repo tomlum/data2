@@ -6,6 +6,14 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
     
     public PFBLeaf() {}
     
+    public boolean rbInvar1(){
+        return true;
+    }
+    
+    public int ranPathBCount(){
+        return 1;
+    }
+    
     public boolean redHuh(){
         return false;
     }

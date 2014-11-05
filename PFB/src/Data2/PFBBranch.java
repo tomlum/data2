@@ -34,6 +34,26 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
         this.red = red;
     }
     
+    public boolean rbInvar1(){
+        if(this.red&&(this.le.redHuh()||this.ri.redHuh())){
+            return false;
+        }
+        return this.le.rbInvar1()&&this.ri.rbInvar1();
+    }
+    
+    public int ranPathBCount(){
+        if(Math.random()>.5){
+            if(!this.redHuh()){
+                return 1 + this.le.ranPathBCount();
+            }
+            return this.le.ranPathBCount();
+        }
+        if(!this.redHuh()){
+                return 1 + this.ri.ranPathBCount();
+        }
+        return this.ri.ranPathBCount();
+    }
+    
     
     public boolean redHuh(){
         return this.red;
@@ -186,10 +206,6 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
         return this;
     }
     
-    public int longestPath(){
-        return 1+Math.max(this.le.longestPath(), this.ri.longestPath());
-    }
-   
     
     public PFB remove(T elt, int c){
         if(elt.compareTo(this.key)==0){

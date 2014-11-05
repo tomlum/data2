@@ -25,7 +25,8 @@ public interface PFB<T extends Comparable<T>> extends Iterator{
     public PFB remove(T elt, int c);
     //Reduces count of appropriate elt to 0
     public PFB removeAll(T elt);
-    public int longestPath();
+    public boolean rbInvar1();
+    public int ranPathBCount();
     public PFB union(PFB u);
     public PFB inter(PFB u);
     public PFB diff(PFB u);
