@@ -3,6 +3,20 @@ import java.util.Random;
 
 public class Testers {
     
+    public static void testSelfBalancing(int trials, int maxsize){
+        for(int i = 0; i < trials; i++){
+            PFB theBag = new PFBLeaf();
+            for(int j = 0; j < maxsize; j++){
+            theBag = theBag.add(randomInt(1,100));
+            }
+            if(theBag.longestPath() > 2*Math.log(theBag.cardinality())){
+                System.out.println("Error in PFB Self Balancing/longestPath");
+                System.out.println(theBag.longestPath());
+                System.out.println(2*Math.log(theBag.cardinality()));
+            }
+        }
+    }
+    
     public static void printSequence(Iterator it){
         Iterator iter = it;
         try{

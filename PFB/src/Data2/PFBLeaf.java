@@ -2,7 +2,38 @@ package Data2;
 
 public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
     
+    int height;
+    
     public PFBLeaf() {}
+    
+    public boolean redHuh(){
+        return false;
+    }
+    
+    public PFB add(T elt, int c){
+        return new PFBBranch(elt,c).toBlack();
+    }
+    
+    public PFB add(T elt){
+        return new PFBBranch(elt,1).toBlack();
+    }
+    
+    
+    public PFBBranch ad(T elt, int c){
+        return new PFBBranch(elt,c);
+    }
+    
+    public int longestPath(){
+        return 0;
+    }
+    
+    public PFB left()throws NothingHere{
+        throw new NothingHere();
+    }
+    
+    public PFB right()throws NothingHere{
+        throw new NothingHere();
+    }
     
     public T here() throws NothingHere{
         throw new NothingHere();
@@ -40,14 +71,6 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
     
     public int countOf(T elt){
         return 0;
-    }
-    
-    public PFB add(T elt, int c){
-        return new PFBBranch(elt, c);
-    }
-    
-    public PFB add(T elt){
-        return new PFBBranch(elt, 1);
     }
     
     public PFB remove(T elt, int c){
