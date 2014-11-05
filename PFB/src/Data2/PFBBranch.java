@@ -116,9 +116,23 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
         return this.ad(elt, 1).toBlack();
     }
     
+    //THE WAY THIS WORKS BALANCING FLOWS UP THE TREE, SO COOL
+    public PFBBranch ad(T elt, int c){
+    if(this.key.compareTo(elt)>0){
+             return new PFBBranch(this.key, this.count, this.red, 
+                        this.le.ad(elt, c),
+                        this.ri).balance();}
+    else if(this.key.compareTo(elt)<0){
+             return new PFBBranch(this.key, this.count, this.red, 
+                        this.le,
+                        this.ri.ad(elt, c)).balance();}
+    else return new PFBBranch(this.key,this.count+c, this.red, this.le,this.ri);   
+    }
+    
     public PFBBranch balance(){
         if(!this.redHuh()){
-        try{if(this.le.redHuh()&&this.le.left().redHuh()){
+        try{   
+            if(this.le.redHuh()&&this.le.left().redHuh()){
                 PFBBranch lef = (PFBBranch)this.le;
                 PFBBranch lefgrand = (PFBBranch)lef.le;
                 return new PFBBranch(lef.key,lef.count,true,
@@ -166,22 +180,10 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
             }
         }
         catch(NothingHere e){}
+        
         return this;
     }
         return this;
-    }
-    
-    //THE WAY THIS WORKS BALANCING FLOWS UP THE TREE, SO COOL
-    public PFBBranch ad(T elt, int c){
-    if(this.key.compareTo(elt)>0){
-             return new PFBBranch(this.key, this.count, 
-                        this.le.ad(elt, c),
-                        this.ri).balance();}
-    else if(this.key.compareTo(elt)<0){
-             return new PFBBranch(this.key, this.count, 
-                        this.le,
-                        this.ri.ad(elt, c)).balance();}
-    else return new PFBBranch(this.key,this.count+c,this.le,this.ri);   
     }
     
     public int longestPath(){

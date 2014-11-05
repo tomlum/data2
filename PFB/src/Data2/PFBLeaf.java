@@ -11,16 +11,16 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
     }
     
     public PFB add(T elt, int c){
-        return new PFBBranch(elt,c).toBlack();
+        return new PFBBranch(elt,c,true,new PFBLeaf(),new PFBLeaf());
     }
     
     public PFB add(T elt){
-        return new PFBBranch(elt,1).toBlack();
+        return new PFBBranch(elt,1,true,new PFBLeaf(),new PFBLeaf());
     }
     
     
     public PFBBranch ad(T elt, int c){
-        return new PFBBranch(elt,c);
+        return new PFBBranch(elt,c,true,new PFBLeaf(),new PFBLeaf());
     }
     
     public int longestPath(){
