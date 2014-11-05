@@ -148,8 +148,8 @@ public class PFBBranch<T extends Comparable<T>> implements PFB<T>, Iterator{
                 PFBBranch riggrand = (PFBBranch)rig.ri;
                 return new PFBBranch(rig.key,rig.count,true,
                                     new PFBBranch(this.key,this.count,false,
-                                            rig.le,
-                                            this.ri),
+                                            this.le,
+                                            rig.le),
                                     riggrand.toBlack());
             }
         }
