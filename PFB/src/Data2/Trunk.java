@@ -26,18 +26,4 @@ public class Trunk implements Iterator{
         }
         return new Trunk(this.le, this.ri.next());
     }
-    
-    
-    /*public Iterator  next() throws NothingHere{
-        try{if(this.anythingHere()){
-            return new Trunk(this.le.next(), this.ri);
-        }}
-        catch(NothingHere e){
-        return new Trunk(this.le, this.ri.next());
-        }
-        return new Trunk(this.le, this.ri.next());
-    }
-    */
-    
-    
 }

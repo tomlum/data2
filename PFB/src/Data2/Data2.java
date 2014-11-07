@@ -1,4 +1,3 @@
-
 package Data2;
 
 
@@ -56,10 +55,13 @@ public class Data2 {
    
     public static void main(String[] args) {
        Testers.testHasOdds(20);
-       Testers.testNoFilledBagsAndEmptyHuhAndRemoveAllAndCountOf(10);
+       Testers.testCountMethods(10);
        Testers.testLongest(20);
        Testers.testIterLength(100);
-       Testers.testSelfBalancing(100, 100);
+       Testers.testRBInvars(100, 100);
+       Testers.checkSubsetTransitivity(100);
+       Testers.checkProperty4(100, 100);
+       Testers.checkProperty6(100, 100);
     }
     
 }

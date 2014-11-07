@@ -6,6 +6,26 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
     
     public PFBLeaf() {}
     
+    public boolean isEmptyHuh(){
+        return true;
+    }
+    
+    public boolean noFilledBags(){
+        return true;
+    }
+  
+    public PFB left()throws NothingHere{
+        throw new NothingHere();
+    }
+    
+    public PFB right()throws NothingHere{
+        throw new NothingHere();
+    }
+    
+    public boolean redHuh(){
+        return false;
+    }
+    
     public boolean rbInvar1(){
         return true;
     }
@@ -13,10 +33,7 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
     public int ranPathBCount(){
         return 1;
     }
-    
-    public boolean redHuh(){
-        return false;
-    }
+   
     
     public PFB add(T elt, int c){
         return new PFBBranch(elt,c,true,new PFBLeaf(),new PFBLeaf());
@@ -35,13 +52,7 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
         return 0;
     }
     
-    public PFB left()throws NothingHere{
-        throw new NothingHere();
-    }
     
-    public PFB right()throws NothingHere{
-        throw new NothingHere();
-    }
     
     public T here() throws NothingHere{
         throw new NothingHere();
@@ -53,7 +64,7 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
         throw new NothingHere();
     }
     
-    public int keyCount(){
+    public int eltCount(){
         return 0;
     };
     
@@ -61,17 +72,15 @@ public class PFBLeaf<T extends Comparable<T>> implements PFB<T>, Iterator {
         return false;
     }
     
-    public boolean isEmptyHuh(){
-        return true;
-    }
     
     public int cardinality(){
         return 0;
     }
     
-    public boolean noFilledBags(){
-        return true;
+    public int elementCount(){
+        return 0;
     }
+    
     
     public boolean member(T elt){
         return false;

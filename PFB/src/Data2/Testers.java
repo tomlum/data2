@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Testers {
     
-    public static void testSelfBalancing(int trials, int maxsize){
+    public static void testRBInvars(int trials, int maxsize){
         for(int i = 0; i < trials; i++){
             PFB theBag = new PFBLeaf();
             for(int j = 0; j < maxsize; j++){
@@ -109,7 +109,7 @@ public class Testers {
     }
     
     
-    public static void testNoFilledBagsAndEmptyHuhAndRemoveAllAndCountOf(int trials){
+    public static void testCountMethods(int trials){
         for(int i = 0; i < trials; i++){
             PFB theBag = new PFBLeaf();
             int size = randomInt(1,30);
@@ -119,6 +119,11 @@ public class Testers {
             theBag = theBag.add(toAdd, countToAdd);
             if(!theBag.member(toAdd) || theBag.countOf(toAdd)!=countToAdd){
                 System.out.println("error in member/countof");
+            }
+            theBag = theBag.removeAll(toAdd);
+            
+            if(theBag.cardinality()==0 || theBag.eltCount()!=0){
+                System.out.println("error in cardinality/eltCount");
             }
             theBag = theBag.removeAll(toAdd);
             
@@ -143,7 +148,7 @@ public class Testers {
     public static PFB randomPFB(int type, int size){
         PFB bag = new PFBLeaf();
         for(int i = 0; i < size; i++){
-            int toAdd = randomOddOrEven(type, 20);
+            int toAdd = randomOddOrEven(type, size);
             bag = bag.add(toAdd, randomInt(1,5));
             //System.out.println(toAdd);
         }
@@ -180,5 +185,73 @@ public class Testers {
         }
         return theInt;
     }
+    
+    public static void checkSubsetTransitivity(int reps){
+        for(int i = 0; i < reps; i++){
+            
+        PFB RandomBag = randomPFB(0, 10);
+        PFB RandomBag2 = randomPFB(0, 100);
+        PFB RandomBag3 = randomPFB(0, 500);
+        
+          
+        if((RandomBag.subset(RandomBag2) && RandomBag2.subset(RandomBag3))&&!(RandomBag.subset(RandomBag3))){
+            System.out.println("Back to the Drawing Board Tom");
+        }
+        
+        }
+    }
+    
+    public static void checkProperty4(int reps, int range){
+        for(int i = 0; i < reps; i++){
+            
+        PFB RandomTree1 = randomPFB(0,range);
+        PFB RandomTree2 = randomPFB(0,range);
+        PFB InterTree = RandomTree1.inter(RandomTree2);
+        PFB UnionTree = RandomTree1.union(RandomTree2);
+        PFB DiffTree = RandomTree1.diff(RandomTree2);
+        PFB DiffTree2 = RandomTree2.diff(RandomTree1);
+        
+        
+        for(int j = 0; j <= range; j++){
+        if(!DiffTree.union(DiffTree2).union(InterTree).equal(UnionTree)){
+            System.out.println("Back to the Drawing Board Tom, fix checkProperty4");
+        }
+        if(!DiffTree.union(DiffTree2).union(InterTree).member(j) == UnionTree.member(j)){
+            System.out.println("Back to the Drawing Board Tom, fix checkProperty4");
+        }
+        }
+        
+        }
+    }
+    
+    
+     public static void checkProperty6(int reps, int range){
+        for(int i = 0; i < reps; i++){
+            
+        PFB RandomTree1 = randomPFB(0,range);
+        PFB RandomTree2 = randomPFB(0,range);
+        PFB RandomTree3 = randomPFB(0,range);
+        PFB InterTree12 = RandomTree1.inter(RandomTree2);
+        PFB InterTree23 = RandomTree2.inter(RandomTree3);
+        PFB InterTree13 = RandomTree1.inter(RandomTree3);
+        PFB InterUnionTree123 = InterTree12.union(InterTree13.union(InterTree23));
+        PFB InterTree123 = InterTree12.inter(InterTree13.inter(InterTree23));
+        
+        
+        for(int j = 0; j <= range; j++){
+        if(InterTree123.member(j) && !(
+                InterTree12.inter(InterTree13).member(j)
+                && InterTree12.inter(InterTree23).member(j)
+                && InterTree13.inter(InterTree23).member(j)
+                
+                )){
+            System.out.println("Back to the Drawing Board Tom, fix checkProperty3");
+        }
+        }
+        
+        
+        }
+    }
+    
     
 }

@@ -1,4 +1,3 @@
-
 package Data2;
 
 public class Leaf implements FinSet, Iterator{
@@ -7,9 +6,21 @@ public class Leaf implements FinSet, Iterator{
    
     public Leaf() {}
     
+    /**
+     *@return if the leaf is empty, which will always be true
+     */
+    public boolean isEmptyHuh(){
+        return true;
+    }
+    
+    
      public Integer here() throws NothingHere{
         throw new NothingHere();
     }
+    /**
+     *@return if any value is in the leaf, which will always be false 
+     */
+     
     public boolean anythingHere(){
         return false;
     }
@@ -21,10 +32,12 @@ public class Leaf implements FinSet, Iterator{
         return 0;
     };
     
-    public boolean isEmptyHuh(){
-        return true;
-    }
     
+    
+    /**
+     *@param elt the element to check membership of
+     *@return if the element is in the leaf, which will always be false 
+     */
     public boolean member(int elt){
         return false;
     }
